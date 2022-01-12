@@ -5,11 +5,11 @@ import User from '../entities/user.entity';
 import { UsersRepository } from '../users.repository';
 
 interface IRequest {
-  user_id: string;
-  name: string;
-  email: string;
-  old_password?: string;
-  password?: string;
+  user_id;
+  name;
+  email;
+  password;
+  old_password;
 }
 
 @Injectable()

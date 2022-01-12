@@ -1,20 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { AppError } from 'src/shared/errors/AppError';
+import { CreateUserDTO } from '../dto/create-user.dto';
 import User from '../entities/user.entity';
 import { UsersRepository } from '../users.repository';
-
-interface IRequest {
-  name: string;
-  email: string;
-  password: string;
-}
 
 @Injectable()
 export class CreateUserService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ name, email, password }: IRequest): Promise<User> {
+  async execute({ name, email, password }: CreateUserDTO): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
