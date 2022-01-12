@@ -3,9 +3,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { uploadConfig } from './config/upload';
+import DiskStorageProvider from './shared/providers/StorageProvider/implementations/DiskStorageProvider';
+import { UsersModule } from './users/users.module';
 
+const providers = {
+  disk: DiskStorageProvider,
+};
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -18,7 +23,13 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: 'StorageProvider',
+      useValue: providers[uploadConfig.driver],
+    },
+  ],
 })
 export class AppModule {
   constructor(private connection: Connection) {
