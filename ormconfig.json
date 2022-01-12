@@ -6,9 +6,9 @@
   "password": "admin",
   "database": "gobarber",
   "uuidExtension": "pgcrypto",
-  "entities": ["dist/**/*.entity{.ts,.js}"],
-  "migrations": [".src/database/migrations/*.ts"],
+  "entities": ["dist/**/*.entity.js"],
+  "migrations": ["dist/shared/database/migrations/*.ts"],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/shared/database/migrations"
   }
 }
