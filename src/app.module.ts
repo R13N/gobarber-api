@@ -4,13 +4,9 @@ import { Connection, getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { uploadConfig } from './config/upload';
-import DiskStorageProvider from './shared/providers/StorageProvider/implementations/DiskStorageProvider';
+import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './users/users.module';
 
-const providers = {
-  disk: DiskStorageProvider,
-};
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -21,18 +17,13 @@ const providers = {
     }),
     UsersModule,
     AuthModule,
+    SharedModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: 'StorageProvider',
-      useValue: providers[uploadConfig.driver],
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {
-  constructor(private connection: Connection) {
+  constructor(connection: Connection) {
     console.log('STATUS CONNECTION', connection.isConnected);
   }
 }

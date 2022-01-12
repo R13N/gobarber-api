@@ -37,3 +37,6 @@ lerna-debug.log*
 # Temp folder
 tmp
 uploads
+
+# ENV
+.env

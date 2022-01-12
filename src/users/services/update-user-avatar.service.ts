@@ -13,7 +13,8 @@ interface IRequest {
 export class UpdateUserAvatarService {
   constructor(
     private usersRepository: UsersRepository,
-    @Inject('StorageProvider') private storageProvider: StorageProvider,
+    @Inject('StorageProvider')
+    private readonly storageProvider: StorageProvider,
   ) {}
 
   public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {

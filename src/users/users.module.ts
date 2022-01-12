@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { uploadConfig } from 'src/config/upload';
+import { storageConfig } from 'src/config/storage';
+import { SharedModule } from 'src/shared/shared.module';
 import { CreateUserService } from './services/create-user.service';
 import { FindUserByEmailService } from './services/find-user-by-email.service';
 import { ShowProfileService } from './services/show-profile.service';
@@ -12,10 +13,11 @@ import { UsersRepository } from './users.repository';
 
 @Module({
   imports: [
+    SharedModule,
     TypeOrmModule.forFeature([UsersRepository]),
     MulterModule.registerAsync({
       useFactory: () => ({
-        storage: uploadConfig.multer,
+        storage: storageConfig.upload.multer.storage,
       }),
     }),
   ],
