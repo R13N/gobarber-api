@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { CreateUserDTO } from './dto/create-user.dto';
+import { ICreateUserDAO } from './dao/create-user.dao';
 import { User } from './entities/user.entity';
 
 @EntityRepository(User)
@@ -38,7 +38,7 @@ export class UsersRepository extends Repository<User> {
     name,
     email,
     password,
-  }: CreateUserDTO): Promise<User> {
+  }: ICreateUserDAO): Promise<User> {
     const user = this.create({ name, email, password });
 
     await this.save(user);

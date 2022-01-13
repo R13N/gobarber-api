@@ -1,8 +1,8 @@
 import { EntityRepository, Raw, Repository } from 'typeorm';
-import { CreateAppointmentDTO } from './dto/create-appointment.dto';
-import { FindAllInDayFromProviderDTO } from './dto/find-all-in-day-from-provider.dto copy';
-import { FindAllInMonthFromProviderDTO } from './dto/find-all-in-month-from-provider.dto';
-import { FindByDateDTO } from './dto/find-by-date.dto';
+import { ICreateAppointmentDAO } from './dao/create-appoitment.dao';
+import { IFindAllInDayFromProviderDAO } from './dao/find-all-in-day-from-provider.dao';
+import { IFindAllInMonthFromProviderDAO } from './dao/find-all-in-month-from-provider.dao';
+import { IFindByDateDAO } from './dao/find-by-date.dao';
 import Appointment from './entities/appointment.entity';
 
 @EntityRepository(Appointment)
@@ -10,7 +10,7 @@ export class AppointmentsRepository extends Repository<Appointment> {
   public async findByDate({
     date,
     provider_id,
-  }: FindByDateDTO): Promise<Appointment | undefined> {
+  }: IFindByDateDAO): Promise<Appointment | undefined> {
     const findAppointment = await this.findOne({
       where: { date, provider_id },
     });
@@ -21,7 +21,7 @@ export class AppointmentsRepository extends Repository<Appointment> {
     provider_id,
     month,
     year,
-  }: FindAllInMonthFromProviderDTO): Promise<Appointment[]> {
+  }: IFindAllInMonthFromProviderDAO): Promise<Appointment[]> {
     const parsedMonth = String(month).padStart(2, '0');
 
     const appointments = await this.find({
@@ -42,7 +42,7 @@ export class AppointmentsRepository extends Repository<Appointment> {
     day,
     month,
     year,
-  }: FindAllInDayFromProviderDTO): Promise<Appointment[]> {
+  }: IFindAllInDayFromProviderDAO): Promise<Appointment[]> {
     const parsedMonth = String(month).padStart(2, '0');
     const parsedDay = String(day).padStart(2, '0');
 
@@ -64,7 +64,7 @@ export class AppointmentsRepository extends Repository<Appointment> {
     provider_id,
     user_id,
     date,
-  }: CreateAppointmentDTO): Promise<Appointment> {
+  }: ICreateAppointmentDAO): Promise<Appointment> {
     const appointment = this.create({
       provider_id,
       user_id,
