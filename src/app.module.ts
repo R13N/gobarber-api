@@ -4,10 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { storageConfig } from './config/storage';
-import { SharedModule } from './shared/shared.module';
-import { UsersModule } from './users/users.module';
+import { AppointmentsModule } from './modules/appointments/appointments.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { SharedModule } from './modules/shared/shared.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     SharedModule,
+    AppointmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { storageConfig } from 'src/config/storage';
-import { SharedModule } from 'src/shared/shared.module';
+import { SharedModule } from 'src/modules/shared/shared.module';
 import { ProfileController } from './controllers/profile.controller';
 import { UsersController } from './controllers/users.controller';
 import { CreateUserService } from './services/create-user.service';

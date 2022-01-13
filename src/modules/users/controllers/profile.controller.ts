@@ -8,7 +8,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { UpdateProfileDTO } from '../dto/update-profile.dto';
 import { ShowProfileService } from '../services/show-profile.service';
 import { UpdateProfileService } from '../services/update-profile.service';
