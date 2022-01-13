@@ -3,9 +3,9 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  Matches,
   ValidateIf,
 } from 'class-validator';
+import { Match } from 'src/shared/decorators/match.decorator';
 
 export class UpdateProfileDTO {
   @IsOptional()
@@ -23,7 +23,7 @@ export class UpdateProfileDTO {
   password?: string;
 
   @ValidateIf((o) => o.password)
-  @Matches('password')
+  @Match('password', { message: 'Passwords do not match' })
   @IsNotEmpty()
   password_confirmation?: string;
 }
