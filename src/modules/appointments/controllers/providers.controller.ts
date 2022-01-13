@@ -1,26 +1,26 @@
 import { Controller, Get, Param, Query, Req, UseGuards } from '@nestjs/common';
-import { IsNumber, IsUUID } from 'class-validator';
+import { IsNumberString, IsUUID } from 'class-validator';
 import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { ListProviderDayAvailabilityService } from '../services/list-provider-day-availability.service';
 import { ListProviderMonthAvailabilityService } from '../services/list-provider-month-availability.service';
 import { ListProvidersService } from '../services/list-providers.service';
 
 class DataQuery {
-  @IsNumber()
+  @IsNumberString()
   month: number;
 
-  @IsNumber()
+  @IsNumberString()
   year: number;
 }
 
 class FullDataQuery {
-  @IsNumber()
+  @IsNumberString()
   month: number;
 
-  @IsNumber()
+  @IsNumberString()
   day: number;
 
-  @IsNumber()
+  @IsNumberString()
   year: number;
 }
 

@@ -1,5 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import { getDate, getDaysInMonth, isAfter } from 'date-fns';
-import { AppointmentsRepository } from '../appointments.repository';
+import { AppointmentsRepository } from '../repositories/appointments.repository';
 
 interface IRequest {
   provider_id: string;
@@ -11,7 +12,7 @@ type IResponse = Array<{
   day: number;
   available: boolean;
 }>;
-
+@Injectable()
 export class ListProviderMonthAvailabilityService {
   constructor(private appointmentsRepository: AppointmentsRepository) {}
 

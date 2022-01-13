@@ -1,7 +1,8 @@
-import { format, getHours, isBefore, startOfHour } from 'date-fns';
+import { Injectable } from '@nestjs/common';
+import { getHours, isBefore, startOfHour } from 'date-fns';
 import { AppError } from 'src/modules/shared/errors/AppError';
-import { AppointmentsRepository } from '../appointments.repository';
 import Appointment from '../entities/appointment.entity';
+import { AppointmentsRepository } from '../repositories/appointments.repository';
 
 interface IRequest {
   provider_id: string;
@@ -9,6 +10,7 @@ interface IRequest {
   date: Date;
 }
 
+@Injectable()
 export class CreateAppointmentService {
   constructor(private appointmentsRepository: AppointmentsRepository) {}
 
@@ -17,7 +19,7 @@ export class CreateAppointmentService {
     provider_id,
     user_id,
   }: IRequest): Promise<Appointment> {
-    const appointmentDate = startOfHour(date);
+    const appointmentDate = startOfHour(new Date(date));
 
     if (isBefore(appointmentDate, Date.now())) {
       throw new AppError("You cant't create an appointment on past date");
@@ -43,13 +45,13 @@ export class CreateAppointmentService {
       throw new AppError('This appointment is already booked');
     }
 
-    const appointment = await this.appointmentsRepository.create({
+    const appointment = this.appointmentsRepository.createAppointment({
       user_id,
       provider_id,
       date: appointmentDate,
     });
 
-    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
+    // const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
 
     // await this.notificationsRepository.create({
     //   recipient_id: provider_id,

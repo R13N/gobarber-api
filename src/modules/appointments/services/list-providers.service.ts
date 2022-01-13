@@ -1,10 +1,11 @@
+import { Injectable } from '@nestjs/common';
 import { User } from 'src/modules/users/entities/user.entity';
 import { UsersRepository } from 'src/modules/users/users.repository';
 
 interface IRequest {
   user_id: string;
 }
-
+@Injectable()
 export class ListProvidersService {
   constructor(private usersRepository: UsersRepository) {}
 

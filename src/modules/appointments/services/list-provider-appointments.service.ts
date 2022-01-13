@@ -1,5 +1,6 @@
-import { AppointmentsRepository } from '../appointments.repository';
+import { Injectable } from '@nestjs/common';
 import Appointment from '../entities/appointment.entity';
+import { AppointmentsRepository } from '../repositories/appointments.repository';
 
 interface IRequest {
   provider_id: string;
@@ -7,7 +8,7 @@ interface IRequest {
   month: number;
   year: number;
 }
-
+@Injectable()
 export class ListProviderAppointmentsService {
   constructor(private appointmentsRepository: AppointmentsRepository) {}
 

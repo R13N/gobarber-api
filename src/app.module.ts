@@ -16,6 +16,7 @@ import { UsersModule } from './modules/users/users.module';
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {
           autoLoadEntities: true,
+          migrationsRun: true,
         }),
     }),
     ServeStaticModule.forRoot({

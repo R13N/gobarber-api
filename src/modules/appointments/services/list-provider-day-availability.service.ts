@@ -1,5 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import { getHours, isAfter } from 'date-fns';
-import { AppointmentsRepository } from '../appointments.repository';
+import { AppointmentsRepository } from '../repositories/appointments.repository';
 
 interface IRequest {
   provider_id: string;
@@ -12,7 +13,7 @@ type IResponse = Array<{
   hour: number;
   available: boolean;
 }>;
-
+@Injectable()
 export class ListProviderDayAvailabilityService {
   constructor(private appointmentsRepository: AppointmentsRepository) {}
 

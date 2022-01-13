@@ -1,9 +1,9 @@
 import { EntityRepository, Raw, Repository } from 'typeorm';
-import { ICreateAppointmentDAO } from './dao/create-appoitment.dao';
+import Appointment from '../entities/appointment.entity';
+import { ICreateAppointmentDAO } from './dao/appointment';
 import { IFindAllInDayFromProviderDAO } from './dao/find-all-in-day-from-provider.dao';
 import { IFindAllInMonthFromProviderDAO } from './dao/find-all-in-month-from-provider.dao';
 import { IFindByDateDAO } from './dao/find-by-date.dao';
-import Appointment from './entities/appointment.entity';
 
 @EntityRepository(Appointment)
 export class AppointmentsRepository extends Repository<Appointment> {

@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
   Column,
@@ -28,6 +29,7 @@ class Appointment {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
+  @Type(() => Date)
   @Column('timestamp with time zone')
   date: Date;
 
