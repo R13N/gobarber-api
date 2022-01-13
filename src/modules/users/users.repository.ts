@@ -1,5 +1,6 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Not, Repository } from 'typeorm';
 import { ICreateUserDAO } from './dao/create-user.dao';
+import { IFindAllProvidersDAO } from './dao/find-all-providers.dao';
 import { User } from './entities/user.entity';
 
 @EntityRepository(User)
@@ -16,23 +17,23 @@ export class UsersRepository extends Repository<User> {
     return user;
   }
 
-  // public async findAllProviders({
-  //   except_user_id,
-  // }: IFindAllProvidersDTO): Promise<User[]> {
-  //   let users: User[];
+  public async findAllProviders({
+    except_user_id,
+  }: IFindAllProvidersDAO): Promise<User[]> {
+    let users: User[];
 
-  //   if (except_user_id) {
-  //     users = await this.find({
-  //       where: {
-  //         id: Not(except_user_id),
-  //       },
-  //     });
-  //   } else {
-  //     users = await this.find();
-  //   }
+    if (except_user_id) {
+      users = await this.find({
+        where: {
+          id: Not(except_user_id),
+        },
+      });
+    } else {
+      users = await this.find();
+    }
 
-  //   return users;
-  // }
+    return users;
+  }
 
   public async createUser({
     name,
