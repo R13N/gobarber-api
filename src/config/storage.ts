@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import * as crypto from 'crypto';
 import { diskStorage, StorageEngine } from 'multer';
 import { resolve } from 'path';
 
