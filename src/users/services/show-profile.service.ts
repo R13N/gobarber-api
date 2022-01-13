@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AppError } from 'src/shared/errors/AppError';
-import User from '../entities/user.entity';
+import { User } from '../entities/user.entity';
 import { UsersRepository } from '../users.repository';
 
 @Injectable()

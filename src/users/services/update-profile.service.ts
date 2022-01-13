@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
 import { AppError } from 'src/shared/errors/AppError';
-import User from '../entities/user.entity';
+import { User } from '../entities/user.entity';
 import { UsersRepository } from '../users.repository';
 
 interface IRequest {
