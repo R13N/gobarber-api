@@ -53,7 +53,7 @@ Technologies that I used to develop this api
 
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Nest.js](https://expressjs.com/pt-br/)
+- [Nest.js](https://nestjs.com/)
 - [Express](https://expressjs.com/pt-br/)
 - [Multer](https://github.com/expressjs/multer)
 - [TypeORM](https://typeorm.io/#/)
