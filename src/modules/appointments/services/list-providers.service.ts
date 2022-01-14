@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/modules/users/entities/user.entity';
-import { UsersRepository } from 'src/modules/users/users.repository';
+import { UsersRepository } from 'src/modules/users/repositories/users.repository';
 
 interface IRequest {
   user_id: string;

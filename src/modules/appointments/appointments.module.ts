@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersRepository } from '../users/users.repository';
+import { UsersRepository } from '../users/repositories/users.repository';
 import { AppointmentsController } from './controllers/appointments.controller';
 import { ProvidersController } from './controllers/providers.controller';
 import { AppointmentsRepository } from './repositories/appointments.repository';

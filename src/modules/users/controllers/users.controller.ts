@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
-import { CreateUserDTO } from '../dtos/create-user.dto';
 import { CreateUserService } from '../services/create-user.service';
 import { UpdateUserAvatarService } from '../services/update-user-avatar.service';
+import { CreateUserDTO } from './dtos/create-user.dto';
 
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)

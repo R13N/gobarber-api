@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { AppError } from 'src/modules/shared/errors/AppError';
-import { CreateUserDTO } from '../dtos/create-user.dto';
+import { CreateUserDTO } from '../controllers/dtos/create-user.dto';
 import { User } from '../entities/user.entity';
-import { UsersRepository } from '../users.repository';
+import { UsersRepository } from '../repositories/users.repository';
 
 @Injectable()
 export class CreateUserService {

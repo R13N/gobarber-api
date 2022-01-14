@@ -1,7 +1,7 @@
 import { EntityRepository, Not, Repository } from 'typeorm';
+import { User } from '../entities/user.entity';
 import { ICreateUserDAO } from './daos/create-user.dao';
 import { IFindAllProvidersDAO } from './daos/find-all-providers.dao';
-import { User } from './entities/user.entity';
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AppError } from 'src/modules/shared/errors/AppError';
 import { IStorageProvider } from 'src/modules/shared/providers/StorageProvider/models/storage.provider';
 import { User } from '../entities/user.entity';
-import { UsersRepository } from '../users.repository';
+import { UsersRepository } from '../repositories/users.repository';
 
 interface IRequest {
   user_id: string;

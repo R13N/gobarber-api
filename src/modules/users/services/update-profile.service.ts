@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
 import { AppError } from 'src/modules/shared/errors/AppError';
 import { User } from '../entities/user.entity';
-import { UsersRepository } from '../users.repository';
+import { UsersRepository } from '../repositories/users.repository';
 
 interface IRequest {
   user_id;

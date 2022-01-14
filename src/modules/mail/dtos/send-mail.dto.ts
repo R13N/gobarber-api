@@ -1,4 +1,6 @@
-import { IParseMailTemplateDTO } from '../../MailTemplateProvider/dtos/parse-mail-template.dto';
+interface ITemplateVariables {
+  [key: string]: string | number;
+}
 
 interface IMailContact {
   name: string;
@@ -9,5 +11,5 @@ export interface ISendMailDTO {
   to: IMailContact;
   from?: IMailContact;
   subject: string;
-  templateData: IParseMailTemplateDTO;
+  context: ITemplateVariables;
 }
