@@ -23,7 +23,7 @@ export class PasswordController {
     return this.sendForgotPasswordEmailService.execute({ email });
   }
 
-  @Post()
+  @Post('reset')
   resetPassword(
     @Body()
     { password, token }: ResetPasswordDTO,

@@ -1,4 +1,4 @@
-import { IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID, ValidateIf } from 'class-validator';
 import { Match } from 'src/modules/shared/decorators/match.decorator';
 
 export class ResetPasswordDTO {
@@ -6,6 +6,8 @@ export class ResetPasswordDTO {
   token: string;
   @IsString()
   password: string;
-  @Match('password')
+  @ValidateIf((o) => o.password)
+  @IsNotEmpty()
+  @Match('password', { message: 'Passwords do not match' })
   password_confirmation: string;
 }
