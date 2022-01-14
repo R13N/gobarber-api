@@ -1,6 +1,6 @@
 import { EntityRepository, Not, Repository } from 'typeorm';
-import { ICreateUserDAO } from './dao/create-user.dao';
-import { IFindAllProvidersDAO } from './dao/find-all-providers.dao';
+import { ICreateUserDAO } from './daos/create-user.dao';
+import { IFindAllProvidersDAO } from './daos/find-all-providers.dao';
 import { User } from './entities/user.entity';
 
 @EntityRepository(User)

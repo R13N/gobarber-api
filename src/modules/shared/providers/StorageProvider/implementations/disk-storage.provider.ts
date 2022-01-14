@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { storageConfig } from 'src/config/storage';
-import { StorageProvider } from '../models/StorageProvider';
+import { IStorageProvider } from '../models/storage.provider';
 
 @Injectable()
-export default class DiskStorageProvider implements StorageProvider {
+export default class DiskStorageProvider implements IStorageProvider {
   public async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
       path.resolve(storageConfig.tmpFolder, file),

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AppError } from 'src/modules/shared/errors/AppError';
-import { StorageProvider } from 'src/modules/shared/providers/StorageProvider/models/StorageProvider';
+import { IStorageProvider } from 'src/modules/shared/providers/StorageProvider/models/storage.provider';
 import { User } from '../entities/user.entity';
 import { UsersRepository } from '../users.repository';
 
@@ -14,7 +14,7 @@ export class UpdateUserAvatarService {
   constructor(
     private usersRepository: UsersRepository,
     @Inject('StorageProvider')
-    private readonly storageProvider: StorageProvider,
+    private readonly storageProvider: IStorageProvider,
   ) {}
 
   public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
