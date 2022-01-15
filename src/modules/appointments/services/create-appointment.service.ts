@@ -1,6 +1,6 @@
+import { AppError } from '@modules/shared/errors/AppError';
 import { Injectable } from '@nestjs/common';
 import { getHours, isBefore, startOfHour } from 'date-fns';
-import { AppError } from 'src/modules/shared/errors/AppError';
 import Appointment from '../entities/appointment.entity';
 import { AppointmentsRepository } from '../repositories/appointments.repository';
 

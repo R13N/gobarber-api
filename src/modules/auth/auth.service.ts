@@ -1,7 +1,7 @@
+import { FindUserByEmailService } from '@modules/users/services/find-user-by-email.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
-import { FindUserByEmailService } from 'src/modules/users/services/find-user-by-email.service';
 
 @Injectable()
 export class AuthService {

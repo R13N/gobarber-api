@@ -1,5 +1,5 @@
+import { User } from '@modules/users/entities/user.entity';
 import { Type } from 'class-transformer';
-import { User } from 'src/modules/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
