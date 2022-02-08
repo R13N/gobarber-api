@@ -5,8 +5,6 @@ import { ConfigService } from '@nestjs/config';
 import * as path from 'path';
 import { MailService } from './mail.service';
 
-console.log(path.join(__dirname, 'templates'));
-
 @Global()
 @Module({
   imports: [

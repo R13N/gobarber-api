@@ -8,6 +8,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { ShowProfileService } from '../services/show-profile.service';
 import { UpdateProfileService } from '../services/update-profile.service';
@@ -29,6 +30,7 @@ export class ProfileController {
 
   @UseGuards(JwtAuthGuard)
   @Put()
+  @ApiBody({ type: UpdateProfileDTO })
   update(
     @Req() req,
     @Body()
