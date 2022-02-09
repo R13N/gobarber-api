@@ -10,7 +10,7 @@ import {
 import { IsNumberString } from 'class-validator';
 import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { CreateAppointmentService } from '../services/create-appointment.service';
-import { ListProviderDayAvailabilityService } from '../services/list-provider-day-availability.service';
+import { ListProviderAppointmentsService } from '../services/list-provider-appointments.service';
 import { CreateAppointmentDTO } from './dto/create-appointment.dto';
 
 class DataQuery {
@@ -29,7 +29,7 @@ class DataQuery {
 export class AppointmentsController {
   constructor(
     private readonly createAppointmentService: CreateAppointmentService,
-    private readonly listProvidersDayAvailabilityService: ListProviderDayAvailabilityService,
+    private readonly listProviderAppointments: ListProviderAppointmentsService,
   ) {}
 
   @Post()
@@ -43,7 +43,7 @@ export class AppointmentsController {
 
   @Get('me')
   me(@Req() req, @Query() { day, month, year }: DataQuery) {
-    return this.listProvidersDayAvailabilityService.execute({
+    return this.listProviderAppointments.execute({
       provider_id: req.user.id,
       day,
       month,

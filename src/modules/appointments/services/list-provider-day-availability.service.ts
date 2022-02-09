@@ -1,3 +1,5 @@
+import { AppError } from '@modules/shared/errors/AppError';
+import { UsersRepository } from '@modules/users/repositories/users.repository';
 import { Injectable } from '@nestjs/common';
 import { getHours, isAfter } from 'date-fns';
 import { AppointmentsRepository } from '../repositories/appointments.repository';
@@ -15,7 +17,10 @@ type IResponse = Array<{
 }>;
 @Injectable()
 export class ListProviderDayAvailabilityService {
-  constructor(private appointmentsRepository: AppointmentsRepository) {}
+  constructor(
+    private appointmentsRepository: AppointmentsRepository,
+    private usersRepository: UsersRepository,
+  ) {}
 
   public async execute({
     provider_id,
@@ -23,6 +28,12 @@ export class ListProviderDayAvailabilityService {
     month,
     year,
   }: IRequest): Promise<IResponse> {
+    const provider = await this.usersRepository.findOne(provider_id);
+
+    if (!provider) {
+      throw new AppError('Provider not exists');
+    }
+
     const appointments =
       await this.appointmentsRepository.findAllInDayFromProvider({
         provider_id,

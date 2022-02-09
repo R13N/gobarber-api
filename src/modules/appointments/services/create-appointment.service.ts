@@ -1,4 +1,5 @@
 import { AppError } from '@modules/shared/errors/AppError';
+import { UsersRepository } from '@modules/users/repositories/users.repository';
 import { Injectable } from '@nestjs/common';
 import { getHours, isBefore, startOfHour } from 'date-fns';
 import Appointment from '../entities/appointment.entity';
@@ -12,7 +13,10 @@ interface IRequest {
 
 @Injectable()
 export class CreateAppointmentService {
-  constructor(private appointmentsRepository: AppointmentsRepository) {}
+  constructor(
+    private appointmentsRepository: AppointmentsRepository,
+    private usersRepository: UsersRepository,
+  ) {}
 
   public async execute({
     date,
@@ -20,6 +24,12 @@ export class CreateAppointmentService {
     user_id,
   }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(new Date(date));
+
+    const provider = await this.usersRepository.findOne(provider_id);
+
+    if (!provider) {
+      throw new AppError('Provider not exists');
+    }
 
     if (isBefore(appointmentDate, Date.now())) {
       throw new AppError("You cant't create an appointment on past date");
@@ -44,6 +54,12 @@ export class CreateAppointmentService {
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is already booked');
     }
+
+    console.log({
+      user_id,
+      provider_id,
+      date: appointmentDate,
+    });
 
     const appointment = this.appointmentsRepository.createAppointment({
       user_id,
