@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { IDateProvider } from '@modules/shared/providers/DateProvider/models/date.provider';
+import { Inject, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
-import { addHours, isAfter } from 'date-fns';
 import { AppError } from 'src/modules/shared/errors/AppError';
 import { UserTokensRepository } from '../repositories/user-tokens.repository';
 import { UsersRepository } from '../repositories/users.repository';
@@ -15,6 +15,8 @@ export class ResetPasswordService {
   constructor(
     private usersRepository: UsersRepository,
     private userTokensRepository: UserTokensRepository,
+    @Inject('DateProvider')
+    private dateProvider: IDateProvider,
   ) {}
 
   async execute({ token, password }: IRequest): Promise<void> {
@@ -30,10 +32,12 @@ export class ResetPasswordService {
       throw new AppError('User does not exists');
     }
 
-    const tokenCreatedAt = userToken.created_at;
-    const compareDate = addHours(tokenCreatedAt, 2);
+    const isValid = this.dateProvider.compareIfBefore(
+      userToken.expires_at,
+      new Date(),
+    );
 
-    if (isAfter(Date.now(), compareDate)) {
+    if (isValid) {
       throw new AppError('Token expired');
     }
 

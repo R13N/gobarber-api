@@ -3,18 +3,26 @@ import UserToken from '../entities/user-token.entity';
 
 @EntityRepository(UserToken)
 export class UserTokensRepository extends Repository<UserToken> {
-  public async findByToken(token: string): Promise<UserToken | undefined> {
-    const userToken = await this.findOne({
-      where: { token },
-    });
-
-    return userToken;
+  async findByUserIdAndToken(
+    user_id: string,
+    token: string,
+  ): Promise<UserToken> {
+    const usersTokens = await this.findOne(
+      {
+        user_id,
+        token,
+      },
+      { relations: ['user'] },
+    );
+    return usersTokens;
   }
 
-  public async generate(user_id: string): Promise<UserToken> {
-    const userToken = this.create({ user_id });
+  async deleteById(id: string): Promise<void> {
+    await this.delete(id);
+  }
 
-    await this.save(userToken);
+  async findByToken(token: string): Promise<UserToken> {
+    const userToken = await this.findOne({ token });
 
     return userToken;
   }

@@ -22,7 +22,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node -r tsconfig-paths/register --transpile-only ./node_modules/typeorm/cli.js"
+    "typeorm": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register --transpile-only ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.6.1",
@@ -39,6 +39,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "cookie-parser": "^1.4.6",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.0",
     "handlebars": "^4.7.7",
@@ -50,19 +51,21 @@
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0",
+    "rxjs": "^7.5.3",
     "swagger-ui-express": "^4.3.0",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.41",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.13",
-    "@types/jest": "27.0.2",
+    "@types/jest": "27.4.0",
     "@types/multer": "^1.4.7",
-    "@types/node": "^16.0.0",
+    "@types/node": "^17.0.16",
     "@types/nodemailer": "^6.4.4",
     "@types/passport-jwt": "^3.0.6",
     "@types/passport-local": "^1.0.34",

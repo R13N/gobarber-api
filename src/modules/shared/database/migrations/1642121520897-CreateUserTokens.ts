@@ -20,6 +20,10 @@ export class CreateUserTokens1642121520897 implements MigrationInterface {
             isGenerated: true,
           },
           {
+            name: 'expires_at',
+            type: 'timestamp',
+          },
+          {
             name: 'user_id',
             type: 'uuid',
           },

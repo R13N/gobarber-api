@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { IDateProvider } from '@modules/shared/providers/DateProvider/models/date.provider';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailService } from 'src/modules/mail/mail.service';
 import { AppError } from 'src/modules/shared/errors/AppError';
@@ -16,6 +17,8 @@ export class SendForgotPasswordEmailService {
     private userTokensRepository: UserTokensRepository,
     private mailService: MailService,
     private config: ConfigService,
+    @Inject('DateProvider')
+    private dateProvider: IDateProvider,
   ) {}
 
   async execute({ email }: IRequest): Promise<void> {
@@ -25,7 +28,16 @@ export class SendForgotPasswordEmailService {
       throw new AppError('User does not exists');
     }
 
-    const { token } = await this.userTokensRepository.generate(user.id);
+    const expires_at = this.dateProvider.addHours(
+      this.config.get<number>('MAIL_EXPIRATION_HOURS'),
+    );
+
+    const userToken = this.userTokensRepository.create({
+      user_id: user.id,
+      expires_at,
+    });
+
+    const { token } = await this.userTokensRepository.save(userToken);
 
     await this.mailService.sendMail({
       to: {
