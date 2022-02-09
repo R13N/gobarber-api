@@ -46,23 +46,23 @@ export class ProvidersController {
   @Get('/:provider_id/day-availability')
   findDaysAvailability(
     @Param() { provider_id }: ProviderParams,
-    @Query() { month, year }: DataQuery,
+    @Query() { month, year, day }: FullDataQuery,
   ) {
-    return this.listProviderMonthAvailabilityService.execute({
+    return this.listProviderDayAvailabilityService.execute({
       provider_id,
       month,
       year,
+      day,
     });
   }
 
   @Get('/:provider_id/month-availability')
   findMonthAvailability(
     @Param() { provider_id }: ProviderParams,
-    @Query() { month, year, day }: FullDataQuery,
+    @Query() { month, year }: DataQuery,
   ) {
-    return this.listProviderDayAvailabilityService.execute({
+    return this.listProviderMonthAvailabilityService.execute({
       provider_id,
-      day,
       month,
       year,
     });
