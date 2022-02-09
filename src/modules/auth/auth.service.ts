@@ -61,7 +61,8 @@ export class AuthService {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     res.cookie('refresh_token', refresh_token, {
-      secure: this.configService.get<boolean>('HTTP_SECURE'),
+      secure:
+        this.configService.get('HTTP_SECURE') === 'false' ? undefined : true,
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: this.configService.get('PATH_REFRESH_TOKEN'),
